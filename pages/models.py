@@ -5,6 +5,7 @@ from django.utils.translation import gettext_lazy as _
 from utils import AbstractDateTime
 # Third Party imports
 from ckeditor.fields import RichTextField
+from mptt.models import MPTTModel, TreeForeignKey
 
 
 class Slider(AbstractDateTime):
@@ -23,3 +24,24 @@ class Slider(AbstractDateTime):
 
     def __str__(self):
         return f'{self.title} - {self.description}'
+
+
+class MenuItem(MPTTModel):
+    title = models.CharField(
+        max_length=100,
+    )
+    slug = models.SlugField(
+        unique=True,
+    )
+    link = models.URLField()
+    parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
+
+    class MPTTMeta:
+        order_insertion_by = ['title']
+
+    class Meta:
+        verbose_name = 'Menu item'
+        verbose_name_plural = 'Menu items'
+
+    def __str__(self):
+        return self.title

@@ -16,7 +16,7 @@
                             <div class="slider_text">
                                 <span>{{ slide.shortdescription }}</span>
                                 <h1>{{ slide.title }}</h1>
-                                <p>{{ slide.description }}</p>
+                                <p>{{ slide.description | safe }}</p>
                                 <a class="btn btn-primary" href="{{ slide.link }}">Explore Now</a>
                             </div>
                         </div>
