@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     # Third Party Apps
     'psycopg2',
     'mptt',
+    'ckeditor',
 ]
 
 MIDDLEWARE = [
@@ -49,7 +50,7 @@ TEMPLATES = [
         'OPTIONS': {
             'context_processors': [
                 # Local Processors
-                'pages.context_processors.global_context'
+                'pages.context_processors.global_context',
                 # Django Processors
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
@@ -100,3 +101,6 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

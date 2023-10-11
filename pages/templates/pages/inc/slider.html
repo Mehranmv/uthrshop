@@ -8,47 +8,23 @@
             "speed": 300,
             "infinite": true
         }'>
-        <div class="single_slider d-flex align-items-center" data-bgimg="../../../static/img/slider/slider1.jpg">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6 col-md-7">
-                        <div class="slider_text">
-                            <span>Lookbook</span>
-                            <h1>fashion trend for autum girls with vibes</h1>
-                            <p>We love seeing how our Aslam wearers like <br> to wear their Norda</p>
-                            <a class="btn btn-primary" href="shop.html">Explore Now</a>
+        {% for slide in slider %}
+            <div class="single_slider d-flex align-items-center" data-bgimg="{{ slide.photo.url }}">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-7">
+                            <div class="slider_text">
+                                <span>{{ slide.shortdescription }}</span>
+                                <h1>{{ slide.title }}</h1>
+                                <p>{{ slide.description }}</p>
+                                <a class="btn btn-primary" href="{{ slide.link }}">Explore Now</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="single_slider d-flex align-items-center" data-bgimg="../../../static/img/slider/slider1.jpg">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6 col-md-7">
-                        <div class="slider_text">
-                            <span>Lookbook</span>
-                            <h1>fashion trend for autum girls with vibes</h1>
-                            <p>We love seeing how our Aslam wearers like <br> to wear their Norda</p>
-                            <a class="btn btn-primary" href="shop.html">Explore Now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="single_slider d-flex align-items-center" data-bgimg="../../../static/img/slider/slider1.jpg">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6 col-md-7">
-                        <div class="slider_text">
-                            <span>Lookbook</span>
-                            <h1>fashion trend for autum girls with vibes</h1>
-                            <p>We love seeing how our Aslam wearers like <br> to wear their Norda</p>
-                            <a class="btn btn-primary" href="shop.html">Explore Now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        {% endfor %}
+
+
     </div>
 </section>
