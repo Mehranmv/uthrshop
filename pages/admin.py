@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Slider
+from .models import Slider, Menu
+from mptt.admin import DraggableMPTTAdmin
 
 
 @admin.register(Slider)
@@ -13,3 +14,10 @@ class SliderAdmin(admin.ModelAdmin):
         'title',
         'description',
     )
+
+
+@admin.register(Menu)
+class MenuAdmin(DraggableMPTTAdmin):
+    prepopulated_fields = {
+        'slug': ("title",)
+    }

@@ -13,6 +13,9 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
+    # Django Admin Interface
+    'admin_interface',
+    'colorfield',
     # Django Apps
     'django.contrib.admin',
     'django.contrib.auth',
@@ -24,10 +27,12 @@ INSTALLED_APPS = [
     'pages.apps.PagesConfig',
     'products.apps.ProductsConfig',
     'blog.apps.BlogConfig',
+    'orders.apps.OrdersConfig',
     # Third Party Apps
     'psycopg2',
     'mptt',
     'ckeditor',
+
 ]
 
 MIDDLEWARE = [
@@ -51,6 +56,7 @@ TEMPLATES = [
             'context_processors': [
                 # Local Processors
                 'pages.context_processors.global_context',
+                'products.context_processors.global_context',
                 # Django Processors
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',

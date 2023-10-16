@@ -1048,7 +1048,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   overflow: hidden;
   transition: .3s;
   z-index: 99;
-  top: 77px;
+  top: 45px;
   text-align: left;
 }
 .main_menu nav > ul > li ul.sub_menu li a {

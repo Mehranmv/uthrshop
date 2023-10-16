@@ -26,7 +26,7 @@ class Slider(AbstractDateTime):
         return f'{self.title} - {self.description}'
 
 
-class MenuItem(MPTTModel):
+class Menu(MPTTModel):
     title = models.CharField(
         max_length=100,
     )
