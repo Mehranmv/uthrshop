@@ -34,7 +34,13 @@ class Menu(MPTTModel):
         unique=True,
     )
     link = models.URLField()
-    parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
+    parent = TreeForeignKey(
+        'self', 
+        on_delete=models.CASCADE,
+        null=True, 
+        blank=True, 
+        related_name='children'
+        )
 
     class MPTTMeta:
         order_insertion_by = ['title']
