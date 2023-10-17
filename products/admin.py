@@ -3,17 +3,18 @@ from .models import Category, Brand, Product, Choices, Pictures
 from mptt.admin import MPTTModelAdmin
 
 
+class PicturesInline(admin.TabularInline):
+    model = Pictures
+
+
 class ChoiceInline(admin.StackedInline):
     model = Choices
-
-
-class PicturesInline(admin.StackedInline):
-    model = Pictures
 
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     list_display = ('name', 'available', 'price')
+    list_filter = ('category',)
     search_fields = ('name', 'description')
     prepopulated_fields = {
         'slug': ('name',)
@@ -37,6 +38,12 @@ class ProductAdmin(admin.ModelAdmin):
             'Price and Availability',
             {
                 'fields': ('price', 'available')
+            }
+        ),
+        (
+            'Category & Brand',
+            {
+                'fields': ('category', 'brand')
             }
         ),
         (

@@ -29,6 +29,8 @@ INSTALLED_APPS = [
     'blog.apps.BlogConfig',
     'orders.apps.OrdersConfig',
     # Third Party Apps
+    'dajaxice',
+    'dajax',
     'psycopg2',
     'mptt',
     'ckeditor',

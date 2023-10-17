@@ -56,6 +56,14 @@ class Product(models.Model):
         max_length=256
     )
     slug = models.SlugField()
+    category = models.ForeignKey(
+        Category,
+        on_delete=models.CASCADE
+    )
+    brand = models.ForeignKey(
+        Brand,
+        on_delete=models.CASCADE
+    )
     photo = models.ImageField(
         upload_to='product/photos'
     )
@@ -110,3 +118,4 @@ class Choices(models.Model):
         null=True,
         help_text='blank to use Base price'
     )
+    inventory = models.IntegerField()
