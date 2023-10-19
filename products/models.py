@@ -85,21 +85,11 @@ class Product(models.Model):
 # inlines
 
 
-class Pictures(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    picture = models.ImageField(upload_to='product/photos')
-
-    def __str__(self):
-        return self.picture.url
-
 
 class Choices(models.Model):
     product = models.ForeignKey(
         Product,
         on_delete=models.CASCADE
-    )
-    picture = models.ImageField(
-        upload_to='product/photos'
     )
 
     color_name = models.CharField(
@@ -110,12 +100,33 @@ class Choices(models.Model):
         verbose_name='Color Code',
         help_text='#f456a'
     )
-    size = models.CharField(
-        choices=[(size.value, size.name) for size in Sizes],
-    )
+    # size = models.CharField(
+    #     choices=[(size.value, size.name) for size in Sizes],
+    # )
     price = models.FloatField(
         blank=True,
         null=True,
         help_text='blank to use Base price'
     )
     inventory = models.IntegerField()
+
+
+class Size(models.Model):
+    choice = models.ForeignKey(
+        Choices,
+        on_delete=models.CASCADE,
+    )
+    size = models.CharField(
+        max_length=200,
+    )
+
+
+class Pictures(models.Model):
+    choice = models.ForeignKey(
+        Choices,
+        on_delete=models.CASCADE,
+    )
+    picture = models.ImageField(upload_to='product/photos')
+
+    def __str__(self):
+        return self.picture.url

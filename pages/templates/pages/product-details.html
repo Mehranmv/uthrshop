@@ -1,66 +1,7 @@
-{% extends 'base.html' %}
-{% block content %}
-    <!--mini cart-->
-    <div class="mini_cart">
-        <div class="cart_gallery">
-            <div class="cart_close">
-                <div class="cart_text">
-                    <h3>cart</h3>
-                </div>
-                <div class="mini_cart_close">
-                    <a href="javascript:void(0)"><i class="icon-close icons"></i></a>
-                </div>
-            </div>
-            <div class="cart_item">
-                <div class="cart_img">
-                    <a href="#"><img src="../../../static/img/product/product1.jpg" alt=""></a>
-                </div>
-                <div class="cart_info">
-                    <a href="#">Primis In Faucibus</a>
-                    <p>1 x <span> $65.00 </span></p>
-                </div>
-                <div class="cart_remove">
-                    <a href="#"><i class="icon-close icons"></i></a>
-                </div>
-            </div>
-            <div class="cart_item">
-                <div class="cart_img">
-                    <a href="#"><img src="../../../static/img/product/product2.jpg" alt=""></a>
-                </div>
-                <div class="cart_info">
-                    <a href="#">Letraset Sheets</a>
-                    <p>1 x <span> $60.00 </span></p>
-                </div>
-                <div class="cart_remove">
-                    <a href="#"><i class="icon-close icons"></i></a>
-                </div>
-            </div>
-        </div>
-        <div class="mini_cart_table">
-            <div class="cart_table_border">
-                <div class="cart_total">
-                    <span>Sub total:</span>
-                    <span class="price">$125.00</span>
-                </div>
-                <div class="cart_total mt-10">
-                    <span>total:</span>
-                    <span class="price">$125.00</span>
-                </div>
-            </div>
-        </div>
-        <div class="mini_cart_footer">
-            <div class="cart_button">
-                <a href="cart.html"><i class="fa fa-shopping-cart"></i> View cart</a>
-            </div>
-            <div class="cart_button">
-                <a href="checkout.html"><i class="fa fa-sign-in"></i> Checkout</a>
-            </div>
-        </div>
-    </div>
-    <!--mini cart end-->
-
+{% extends 'base.html' %} {% block content %}
+    <!-- mini cart -->
     <!--breadcrumbs area start-->
-    <div class="breadcrumbs_area breadcrumbs_product" style="margin-top: 100px;">
+    <div class="breadcrumbs_area breadcrumbs_product" style="margin-top: 100px">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -76,8 +17,6 @@
         </div>
     </div>
     <!--breadcrumbs area end-->
-
-
     <!--product details start-->
     <section class="product_details mb-135" style="">
         <div class="container">
@@ -86,31 +25,28 @@
                     <div class="product_zoom_gallery">
                         <div class="zoom_gallery_inner d-flex">
                             <div class="zoom_tab_img">
-                                {% for images in product.choices_set.all %}
-                                    <a class="zoom_tabimg_list" href="javascript:void(0)"><img
-                                            src="{{ images.picture.url }}"
-                                            alt="tab-thumb"></a>
-                                {% endfor %}
-                                {% for picture in product.pictures_set.all %}
-                                    <a class="zoom_tabimg_list" href="javascript:void(0)"><img
-                                            src="{{ picture }}"
-                                            alt="tab-thumb"></a>
+                                {% for color_name, pictures in pictures.items %}
+                                    {% for picture in pictures %}
+                                        <a class="zoom_tabimg_list" href="javascript:void(0)">
+                                            <img src="{{ picture }}" alt="tab-thumb"/>
+                                        </a>
+                                    {% endfor %}
                                 {% endfor %}
                             </div>
                             <div class="product_zoom_main_img">
-                                {% for images in product.choices_set.all %}
-                                    <div class="product_zoom_thumb">
-                                        <img data-image="{{ images.picture.url }}" height="588px" width="490px"
-                                             src="{{ images.picture.url }}" alt="">
-                                    </div>
+                                {% for color_name, pictures in pictures.items %}
+                                    {% for picture in pictures %}
+                                        <div class="product_zoom_thumb">
+                                            <img
+                                                    data-image="{{ picture }}"
+                                                    height="588px"
+                                                    width="490px"
+                                                    src="{{ picture }}"
+                                                    alt=""
+                                            />
+                                        </div>
+                                    {% endfor %}
                                 {% endfor %}
-                                {% for picture in product.pictures_set.all %}
-                                    <div class="product_zoom_thumb">
-                                        <img data-image="{{ picture }}" height="588px" width="490px"
-                                             src="{{ picture }}" alt="">
-                                    </div>
-                                {% endfor %}
-
                             </div>
                         </div>
                     </div>
@@ -119,37 +55,25 @@
                     <div class="product_d_right">
                         <form action="#">
                             <h1>{{ product.name }}</h1>
-                            {#                            <div class="product_ratting_review d-flex align-items-center">#}
-                            {#                                ratinnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnng#}
-                            {#                                <div class=" product_ratting">#}
-                            {#                                    <ul class="d-flex">#}
-                            {#                                        <li><a href="#"><i class="ion-ios-star"></i></a></li>#}
-                            {#                                        <li><a href="#"><i class="ion-ios-star"></i></a></li>#}
-                            {#                                        <li><a href="#"><i class="ion-ios-star"></i></a></li>#}
-                            {#                                        <li><a href="#"><i class="ion-ios-star"></i></a></li>#}
-                            {#                                        <li><a href="#"><i class="ion-ios-star"></i></a></li>#}
-                            {#                                    </ul>#}
-                            {#                                </div>#}
-                            {#                                <div class="product_review">#}
-                            {#                                    <ul class="d-flex">#}
-                            {#                                        <li>4 reviews</li>#}
-                            {#                                        <li>Write your review</li>#}
-                            {#                                    </ul>#}
-                            {#                                </div>#}
-                            {#                            </div>#}
                             <div class="price_box">
-                                <span class="current_price">
-                                    $ {{ product.price }}
-                                </span>
+                                <span class="current_price"> $ {{ product.price }} </span>
                             </div>
                             <div class="product_availalbe">
                                 <ul class="d-flex">
-                                    <li><i class="icon-layers icons"></i> Only <span>20</span> left</li>
-                                    <li>Availalbe: <span class="stock">{% if product.available == '1' %}
-                                        In Stuck
-                                    {% else %}
-                                        Out Of Stuck
-                                    {% endif %} </span></li>
+                                    <li>
+                                        <i class="icon-layers icons"></i> Only <span>20</span> left
+                                    </li>
+                                    <li>
+                                        Availalbe:
+                                        <span class="stock"
+                                              style="color:{% if product.available == '0' %}red{% endif %}">
+                                            {% if product.available == '1' %}
+                                                In Stuck
+                                            {% else %}
+                                                Out Of Stuck
+                                            {% endif %}
+                                        </span>
+                                    </li>
                                 </ul>
                             </div>
                             <div class="product_desc">
@@ -160,60 +84,75 @@
                                     <h3>select color</h3>
                                     <ul>
                                         {% for code in product.choices_set.all %}
-                                            <li>
-                                                <input type="radio" name="color" id="id_color">
-                                                <span class="checkmark"
-                                                      style="background-color:{{ code.color_code }}"></span>
+
+                                            <li class="widget_sub_categories">
+                                                <input type="radio" name="color" id="id_color" data-toggle="collapse"
+                                                       data-target="#{{ code.color_name }}">
+                                                <span
+                                                        class="checkmark"
+                                                        style="background-color:{{ code.color_code }}">
+
+                                                </span>
+
                                             </li>
                                         {% endfor %}
                                     </ul>
                                 </div>
                                 <div class="filter__list widget_color d-flex align-items-center">
-                                    <h3>select Size</h3>
                                     <ul>
-                                        {% for code in product.choices_set.all %}
-                                            <li>
-                                                <input type="radio" name="size" id="id_size">
-                                                <span class="checkmark text-center text-white font-weight-bold "
-                                                      style="background-color:#c5c5c5;padding: 2px;">
-                                                    {{ code.size }}
-                                                </span>
-                                            </li>
+                                        {% for key, sizes in sizes2.items %}
+                                            {% for size in sizes %}
+                                                <li class="widget_dropdown_categories collapse" id="{{ key }}">
+                                                    <input type="radio" name="size" id="id_size">
+                                                    <span
+                                                            class="checkmark text-center text-white"
+                                                            style="background-color: #818181; padding: 2px">{{ size.size }}
+                                                    </span>
+                                                </li>
+                                            {% endfor %}
                                         {% endfor %}
+
                                     </ul>
                                 </div>
-{#                                <div class="filter__list widget_size d-flex align-items-center">#}
-{#                                    <h3>select size</h3>#}
-{#                                    {% for size in product.choices_set.all %}#}
-{#                                        <input type="radio" name="color" id="id_color">#}
-{#                                        <span class="checkmark" style="background-color: #fff">#}
-{#                                        </span>#}
-{#                                    {% endfor %}#}
-{##}
-{#                                    <ul>#}
-{#                                        <li>#}
-{#                                            <a href="javascript:void(0)">S</a>#}
-{#                                        </li>#}
-{#                                        <li>#}
-{#                                            <a href="javascript:void(0)">M</a>#}
-{#                                        </li>#}
-{#                                        <li>#}
-{#                                            <a href="javascript:void(0)">L</a>#}
-{#                                        </li>#}
-{#                                        <li>#}
-{#                                            <a href="javascript:void(0)">XL</a>#}
-{#                                        </li>#}
-{#                                        <li>#}
-{#                                            <a href="javascript:void(0)">XLL</a>#}
-{#                                        </li>#}
-{#                                    </ul>#}
-{#                                </div>#}
+
+                                {#                                <div class="filter__list widget_size d-flex align-items-center">#}
+                                {#                                    #} {##}
+                                {#                                    <h3>select size</h3>#}
+                                {#                                    #} {# {% for size in product.choices_set.all %}#}
+                                {##}
+                                {#                                    <input type="radio" name="color" id="id_color"/>#}
+                                {##}
+                                {#                                    <span class="checkmark" style="background-color: #fff"#}
+                                {#                                    >#} {# </span#}
+                                {#                                    >#} {# {% endfor %}#} {##} {##}
+                                {#                                    <ul>#}
+                                {#                                        #} {##}
+                                {#                                        <li>#} {# <a href="javascript:void(0)">S</a>#}
+                                {#</li>#}
+                                {#                                        #} {##}
+                                {#                                        <li>#} {# <a href="javascript:void(0)">M</a>#}
+                                {#</li>#}
+                                {#                                        #} {##}
+                                {#                                        <li>#} {# <a href="javascript:void(0)">L</a>#}
+                                {#</li>#}
+                                {#                                        #} {##}
+                                {#                                        <li>#}
+                                {# <a href="javascript:void(0)">XL</a>#} {#</li>#}
+                                {#                                        #} {##}
+                                {#                                        <li>#}
+                                {# <a href="javascript:void(0)">XLL</a>#} {#</li>#}
+                                {#                                        #} {##}
+                                {#                                    </ul>#}
+                                {#                                    #} {##}
+                                {#                                </div>#}
+                                {#                                #}
 
                                 <div class="variant_quantity_btn d-flex">
                                     <div class="pro-qty border">
-                                        <input min="1" max="100" type="text+" value="1">
+                                        <input min="1" max="100" type="text+" value="1"/>
                                     </div>
-                                    <button class="button btn btn-primary" type="submit"><i class="ion-android-add"></i>
+                                    <button class="button btn btn-primary" type="submit">
+                                        <i class="ion-android-add"></i>
                                         Add To Cart
                                     </button>
                                     <a class="wishlist" href="#"><i class="ion-ios-heart"></i></a>
@@ -233,11 +172,21 @@
                             <div class="priduct_social d-flex">
                                 <span>SHARE: </span>
                                 <ul>
-                                    <li><a href="#"><i class="ion-social-twitter"></i></a></li>
-                                    <li><a href="#"><i class="ion-social-facebook"></i></a></li>
-                                    <li><a href="#"><i class="ion-social-googleplus-outline"></i></a></li>
-                                    <li><a href="#"><i class="ion-social-pinterest"></i></a></li>
-                                    <li><a href="#"><i class="ion-social-instagram-outline"></i></a></li>
+                                    <li>
+                                        <a href="#"><i class="ion-social-twitter"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="ion-social-facebook"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="ion-social-googleplus-outline"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="ion-social-pinterest"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="ion-social-instagram-outline"></i></a>
+                                    </li>
                                 </ul>
                             </div>
                         </form>
@@ -255,22 +204,51 @@
                 <div class="col-12">
                     <div class="product_d_inner">
                         <div class="product_info_button border-bottom">
-                            <ul class="nav" role="tablist" style="justify-content: space-between">
+                            <ul
+                                    class="nav"
+                                    role="tablist"
+                                    style="justify-content: space-between"
+                            >
                                 <li>
-                                    <a class="active" data-toggle="tab" href="#info" role="tab" aria-controls="info"
-                                       aria-selected="false">Product Description</a>
+                                    <a
+                                            class="active"
+                                            data-toggle="tab"
+                                            href="#info"
+                                            role="tab"
+                                            aria-controls="info"
+                                            aria-selected="false"
+                                    >Product Description</a
+                                    >
                                 </li>
                                 <li>
-                                    <a data-toggle="tab" href="#reviews" role="tab" aria-controls="reviews"
-                                       aria-selected="false">Reviews </a>
+                                    <a
+                                            data-toggle="tab"
+                                            href="#reviews"
+                                            role="tab"
+                                            aria-controls="reviews"
+                                            aria-selected="false"
+                                    >Reviews
+                                    </a>
                                 </li>
                                 <li>
-                                    <a data-toggle="tab" href="#tags" role="tab" aria-controls="tags"
-                                       aria-selected="false">Tags </a>
+                                    <a
+                                            data-toggle="tab"
+                                            href="#tags"
+                                            role="tab"
+                                            aria-controls="tags"
+                                            aria-selected="false"
+                                    >Tags
+                                    </a>
                                 </li>
                                 <li>
-                                    <a data-toggle="tab" href="#additional" role="tab" aria-controls="additional"
-                                       aria-selected="false">Additional Information </a>
+                                    <a
+                                            data-toggle="tab"
+                                            href="#additional"
+                                            role="tab"
+                                            aria-controls="additional"
+                                            aria-selected="false"
+                                    >Additional Information
+                                    </a>
                                 </li>
                             </ul>
                         </div>
@@ -285,37 +263,59 @@
                                     <h2>1 review for Donec eu furniture</h2>
                                     <div class="reviews_comment_box">
                                         <div class="comment_thmb">
-                                            <img src="../../../static/img/blog/comment2.jpg" alt="">
+                                            <img src="../../../static/img/blog/comment2.jpg" alt=""/>
                                         </div>
                                         <div class="comment_text">
                                             <div class="reviews_meta">
                                                 <div class="star_rating">
                                                     <ul class="d-flex">
-                                                        <li><a href="#"><i class="icon-star"></i></a></li>
-                                                        <li><a href="#"><i class="icon-star"></i></a></li>
-                                                        <li><a href="#"><i class="icon-star"></i></a></li>
-                                                        <li><a href="#"><i class="icon-star"></i></a></li>
-                                                        <li><a href="#"><i class="icon-star"></i></a></li>
+                                                        <li>
+                                                            <a href="#"><i class="icon-star"></i></a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#"><i class="icon-star"></i></a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#"><i class="icon-star"></i></a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#"><i class="icon-star"></i></a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#"><i class="icon-star"></i></a>
+                                                        </li>
                                                     </ul>
                                                 </div>
                                                 <p><strong>admin </strong>- September 12, 2018</p>
                                                 <span>roadthemes</span>
                                             </div>
                                         </div>
-
                                     </div>
                                     <div class="comment_title">
-                                        <h2>Add a review </h2>
-                                        <p>Your email address will not be published. Required fields are marked </p>
+                                        <h2>Add a review</h2>
+                                        <p>
+                                            Your email address will not be published. Required fields
+                                            are marked
+                                        </p>
                                     </div>
                                     <div class="product_ratting mb-10">
                                         <h3>Your rating</h3>
                                         <ul class="d-flex">
-                                            <li><a href="#"><i class="icon-star"></i></a></li>
-                                            <li><a href="#"><i class="icon-star"></i></a></li>
-                                            <li><a href="#"><i class="icon-star"></i></a></li>
-                                            <li><a href="#"><i class="icon-star"></i></a></li>
-                                            <li><a href="#"><i class="icon-star"></i></a></li>
+                                            <li>
+                                                <a href="#"><i class="icon-star"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#"><i class="icon-star"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#"><i class="icon-star"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#"><i class="icon-star"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#"><i class="icon-star"></i></a>
+                                            </li>
                                         </ul>
                                     </div>
                                     <div class="product_review_form">
@@ -327,12 +327,11 @@
                                                 </div>
                                                 <div class="col-lg-6 col-md-6">
                                                     <label for="author">Name</label>
-                                                    <input id="author" type="text">
-
+                                                    <input id="author" type="text"/>
                                                 </div>
                                                 <div class="col-lg-6 col-md-6">
                                                     <label for="email">Email </label>
-                                                    <input id="email" type="text">
+                                                    <input id="email" type="text"/>
                                                 </div>
                                             </div>
                                             <button type="submit">Submit</button>
@@ -341,16 +340,13 @@
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="tags" role="tabpanel">
-                                <div class="product_info_content">
-                                    {{ product.tags | safe }}
-                                </div>
+                                <div class="product_info_content">{{ product.tags | safe }}</div>
                             </div>
                             <div class="tab-pane fade" id="additional" role="tabpanel">
                                 <div class="product_info_content">
                                     <p>{{ product.additional_information | safe }}</p>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -370,7 +366,9 @@
                 </div>
             </div>
             <div class="product_container row">
-                <div class=" product_slick slick_slider_activation" data-slick='{
+                <div
+                        class="product_slick slick_slider_activation"
+                        data-slick='{
                     "slidesToShow": 4,
                     "slidesToScroll": 1,
                     "arrows": true,
@@ -383,56 +381,99 @@
                       {"breakpoint":768, "settings": { "slidesToShow": 2 } },
                       {"breakpoint":300, "settings": { "slidesToShow": 1 } }
                      ]
-                }'>
+                }'
+                >
                     <div class="col-lg-3">
                         <article class="single_product">
                             <figure>
                                 <div class="product_thumb">
                                     <a href="product-details.html">
-                                        <img class="primary_img" src="../../../static/img/product/product1.jpg"
-                                             alt="consectetur">
+                                        <img
+                                                class="primary_img"
+                                                src="../../../static/img/product/product1.jpg"
+                                                alt="consectetur"
+                                        />
                                     </a>
                                     <div class="product_action">
                                         <ul>
-                                            <li class="wishlist"><a href="#" data-tippy="Wishlist"
-                                                                    data-tippy-inertia="true" data-tippy-delay="50"
-                                                                    data-tippy-arrow="true" data-tippy-placement="left"><i
-                                                    class="icon-heart icons"></i></a></li>
+                                            <li class="wishlist">
+                                                <a
+                                                        href="#"
+                                                        data-tippy="Wishlist"
+                                                        data-tippy-inertia="true"
+                                                        data-tippy-delay="50"
+                                                        data-tippy-arrow="true"
+                                                        data-tippy-placement="left"
+                                                ><i class="icon-heart icons"></i
+                                                ></a>
+                                            </li>
 
-                                            <li class="quick_view"><a data-toggle="modal" data-target="#modal_box"
-                                                                      data-tippy="Quick View" href="#"
-                                                                      data-tippy-inertia="true" data-tippy-delay="50"
-                                                                      data-tippy-arrow="true"
-                                                                      data-tippy-placement="left"><i
-                                                    class="icon-size-fullscreen icons"></i></a></li>
-                                            <li class="compare"><a data-tippy="Compare" href="#"
-                                                                   data-tippy-inertia="true" data-tippy-delay="50"
-                                                                   data-tippy-arrow="true"
-                                                                   data-tippy-placement="left"><i
-                                                    class="icon-refresh icons"></i></a></li>
+                                            <li class="quick_view">
+                                                <a
+                                                        data-toggle="modal"
+                                                        data-target="#modal_box"
+                                                        data-tippy="Quick View"
+                                                        href="#"
+                                                        data-tippy-inertia="true"
+                                                        data-tippy-delay="50"
+                                                        data-tippy-arrow="true"
+                                                        data-tippy-placement="left"
+                                                ><i class="icon-size-fullscreen icons"></i
+                                                ></a>
+                                            </li>
+                                            <li class="compare">
+                                                <a
+                                                        data-tippy="Compare"
+                                                        href="#"
+                                                        data-tippy-inertia="true"
+                                                        data-tippy-delay="50"
+                                                        data-tippy-arrow="true"
+                                                        data-tippy-placement="left"
+                                                ><i class="icon-refresh icons"></i
+                                                ></a>
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>
                                 <figcaption class="product_content text-center">
                                     <div class="product_ratting">
                                         <ul class="d-flex justify-content-center">
-                                            <li><a href="#"><i class="ion-android-star"></i></a></li>
-                                            <li><a href="#"><i class="ion-android-star"></i></a></li>
-                                            <li><a href="#"><i class="ion-android-star"></i></a></li>
-                                            <li><a href="#"><i class="ion-android-star"></i></a></li>
-                                            <li><a href="#"><i class="ion-android-star"></i></a></li>
+                                            <li>
+                                                <a href="#"><i class="ion-android-star"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#"><i class="ion-android-star"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#"><i class="ion-android-star"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#"><i class="ion-android-star"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#"><i class="ion-android-star"></i></a>
+                                            </li>
                                             <li><span>(4)</span></li>
                                         </ul>
                                     </div>
-                                    <h4 class="product_name"><a href="product-details.html">Basic Joggin Shorts</a></h4>
+                                    <h4 class="product_name">
+                                        <a href="product-details.html">Basic Joggin Shorts</a>
+                                    </h4>
                                     <div class="price_box">
                                         <span class="current_price">$26.00</span>
                                         <span class="old_price">$62.00</span>
                                     </div>
                                     <div class="add_to_cart">
-                                        <a class="btn btn-primary" href="#" data-tippy="Add To Cart"
-                                           data-tippy-inertia="true" data-tippy-delay="50" data-tippy-arrow="true"
-                                           data-tippy-placement="top">Add To Cart</a>
+                                        <a
+                                                class="btn btn-primary"
+                                                href="#"
+                                                data-tippy="Add To Cart"
+                                                data-tippy-inertia="true"
+                                                data-tippy-delay="50"
+                                                data-tippy-arrow="true"
+                                                data-tippy-placement="top"
+                                        >Add To Cart</a
+                                        >
                                     </div>
                                 </figcaption>
                             </figure>
@@ -443,27 +484,50 @@
                             <figure>
                                 <div class="product_thumb">
                                     <a href="product-details.html">
-                                        <img class="primary_img" src="../../../static/img/product/product2.jpg"
-                                             alt="consectetur">
+                                        <img
+                                                class="primary_img"
+                                                src="../../../static/img/product/product2.jpg"
+                                                alt="consectetur"
+                                        />
                                     </a>
                                     <div class="product_action">
                                         <ul>
-                                            <li class="wishlist"><a href="#" data-tippy="Wishlist"
-                                                                    data-tippy-inertia="true" data-tippy-delay="50"
-                                                                    data-tippy-arrow="true" data-tippy-placement="left"><i
-                                                    class="icon-heart icons"></i></a></li>
+                                            <li class="wishlist">
+                                                <a
+                                                        href="#"
+                                                        data-tippy="Wishlist"
+                                                        data-tippy-inertia="true"
+                                                        data-tippy-delay="50"
+                                                        data-tippy-arrow="true"
+                                                        data-tippy-placement="left"
+                                                ><i class="icon-heart icons"></i
+                                                ></a>
+                                            </li>
 
-                                            <li class="quick_view"><a data-toggle="modal" data-target="#modal_box"
-                                                                      data-tippy="Quick View" href="#"
-                                                                      data-tippy-inertia="true" data-tippy-delay="50"
-                                                                      data-tippy-arrow="true"
-                                                                      data-tippy-placement="left"><i
-                                                    class="icon-size-fullscreen icons"></i></a></li>
-                                            <li class="compare"><a data-tippy="Compare" href="#"
-                                                                   data-tippy-inertia="true" data-tippy-delay="50"
-                                                                   data-tippy-arrow="true"
-                                                                   data-tippy-placement="left"><i
-                                                    class="icon-refresh icons"></i></a></li>
+                                            <li class="quick_view">
+                                                <a
+                                                        data-toggle="modal"
+                                                        data-target="#modal_box"
+                                                        data-tippy="Quick View"
+                                                        href="#"
+                                                        data-tippy-inertia="true"
+                                                        data-tippy-delay="50"
+                                                        data-tippy-arrow="true"
+                                                        data-tippy-placement="left"
+                                                ><i class="icon-size-fullscreen icons"></i
+                                                ></a>
+                                            </li>
+                                            <li class="compare">
+                                                <a
+                                                        data-tippy="Compare"
+                                                        href="#"
+                                                        data-tippy-inertia="true"
+                                                        data-tippy-delay="50"
+                                                        data-tippy-arrow="true"
+                                                        data-tippy-placement="left"
+                                                ><i class="icon-refresh icons"></i
+                                                ></a>
+                                            </li>
                                         </ul>
                                     </div>
                                     <div class="product_label">
@@ -473,24 +537,41 @@
                                 <figcaption class="product_content text-center">
                                     <div class="product_ratting">
                                         <ul class="d-flex justify-content-center">
-                                            <li><a href="#"><i class="ion-android-star"></i></a></li>
-                                            <li><a href="#"><i class="ion-android-star"></i></a></li>
-                                            <li><a href="#"><i class="ion-android-star"></i></a></li>
-                                            <li><a href="#"><i class="ion-android-star"></i></a></li>
-                                            <li><a href="#"><i class="ion-android-star"></i></a></li>
+                                            <li>
+                                                <a href="#"><i class="ion-android-star"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#"><i class="ion-android-star"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#"><i class="ion-android-star"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#"><i class="ion-android-star"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#"><i class="ion-android-star"></i></a>
+                                            </li>
                                             <li><span>(6)</span></li>
                                         </ul>
                                     </div>
-                                    <h4 class="product_name"><a href="product-details.html">Make Thing Happen
-                                        T-Shirts</a></h4>
+                                    <h4 class="product_name">
+                                        <a href="product-details.html">Make Thing Happen T-Shirts</a>
+                                    </h4>
                                     <div class="price_box">
                                         <span class="text-black">$38.00</span>
-
                                     </div>
                                     <div class="add_to_cart">
-                                        <a class="btn btn-primary" href="#" data-tippy="Add To Cart"
-                                           data-tippy-inertia="true" data-tippy-delay="50" data-tippy-arrow="true"
-                                           data-tippy-placement="top">Add To Cart</a>
+                                        <a
+                                                class="btn btn-primary"
+                                                href="#"
+                                                data-tippy="Add To Cart"
+                                                data-tippy-inertia="true"
+                                                data-tippy-delay="50"
+                                                data-tippy-arrow="true"
+                                                data-tippy-placement="top"
+                                        >Add To Cart</a
+                                        >
                                     </div>
                                 </figcaption>
                             </figure>
@@ -501,27 +582,50 @@
                             <figure>
                                 <div class="product_thumb">
                                     <a href="product-details.html">
-                                        <img class="primary_img" src="../../../static/img/product/product3.jpg"
-                                             alt="consectetur">
+                                        <img
+                                                class="primary_img"
+                                                src="../../../static/img/product/product3.jpg"
+                                                alt="consectetur"
+                                        />
                                     </a>
                                     <div class="product_action">
                                         <ul>
-                                            <li class="wishlist"><a href="#" data-tippy="Wishlist"
-                                                                    data-tippy-inertia="true" data-tippy-delay="50"
-                                                                    data-tippy-arrow="true" data-tippy-placement="left"><i
-                                                    class="icon-heart icons"></i></a></li>
+                                            <li class="wishlist">
+                                                <a
+                                                        href="#"
+                                                        data-tippy="Wishlist"
+                                                        data-tippy-inertia="true"
+                                                        data-tippy-delay="50"
+                                                        data-tippy-arrow="true"
+                                                        data-tippy-placement="left"
+                                                ><i class="icon-heart icons"></i
+                                                ></a>
+                                            </li>
 
-                                            <li class="quick_view"><a data-toggle="modal" data-target="#modal_box"
-                                                                      data-tippy="Quick View" href="#"
-                                                                      data-tippy-inertia="true" data-tippy-delay="50"
-                                                                      data-tippy-arrow="true"
-                                                                      data-tippy-placement="left"><i
-                                                    class="icon-size-fullscreen icons"></i></a></li>
-                                            <li class="compare"><a data-tippy="Compare" href="#"
-                                                                   data-tippy-inertia="true" data-tippy-delay="50"
-                                                                   data-tippy-arrow="true"
-                                                                   data-tippy-placement="left"><i
-                                                    class="icon-refresh icons"></i></a></li>
+                                            <li class="quick_view">
+                                                <a
+                                                        data-toggle="modal"
+                                                        data-target="#modal_box"
+                                                        data-tippy="Quick View"
+                                                        href="#"
+                                                        data-tippy-inertia="true"
+                                                        data-tippy-delay="50"
+                                                        data-tippy-arrow="true"
+                                                        data-tippy-placement="left"
+                                                ><i class="icon-size-fullscreen icons"></i
+                                                ></a>
+                                            </li>
+                                            <li class="compare">
+                                                <a
+                                                        data-tippy="Compare"
+                                                        href="#"
+                                                        data-tippy-inertia="true"
+                                                        data-tippy-delay="50"
+                                                        data-tippy-arrow="true"
+                                                        data-tippy-placement="left"
+                                                ><i class="icon-refresh icons"></i
+                                                ></a>
+                                            </li>
                                         </ul>
                                     </div>
                                     <div class="product_label">
@@ -531,24 +635,42 @@
                                 <figcaption class="product_content text-center">
                                     <div class="product_ratting">
                                         <ul class="d-flex justify-content-center">
-                                            <li><a href="#"><i class="ion-android-star"></i></a></li>
-                                            <li><a href="#"><i class="ion-android-star"></i></a></li>
-                                            <li><a href="#"><i class="ion-android-star"></i></a></li>
-                                            <li><a href="#"><i class="ion-android-star"></i></a></li>
-                                            <li><a href="#"><i class="ion-android-star"></i></a></li>
+                                            <li>
+                                                <a href="#"><i class="ion-android-star"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#"><i class="ion-android-star"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#"><i class="ion-android-star"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#"><i class="ion-android-star"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#"><i class="ion-android-star"></i></a>
+                                            </li>
                                             <li><span>(2)</span></li>
                                         </ul>
                                     </div>
-                                    <h4 class="product_name"><a href="product-details.html">Basic White Simple
-                                        Sneaker</a></h4>
+                                    <h4 class="product_name">
+                                        <a href="product-details.html">Basic White Simple Sneaker</a>
+                                    </h4>
                                     <div class="price_box">
                                         <span class="current_price">$43.00</span>
                                         <span class="old_price">$46.00</span>
                                     </div>
                                     <div class="add_to_cart">
-                                        <a class="btn btn-primary" href="#" data-tippy="Add To Cart"
-                                           data-tippy-inertia="true" data-tippy-delay="50" data-tippy-arrow="true"
-                                           data-tippy-placement="top">Add To Cart</a>
+                                        <a
+                                                class="btn btn-primary"
+                                                href="#"
+                                                data-tippy="Add To Cart"
+                                                data-tippy-inertia="true"
+                                                data-tippy-delay="50"
+                                                data-tippy-arrow="true"
+                                                data-tippy-placement="top"
+                                        >Add To Cart</a
+                                        >
                                     </div>
                                 </figcaption>
                             </figure>
@@ -559,50 +681,91 @@
                             <figure>
                                 <div class="product_thumb">
                                     <a href="product-details.html">
-                                        <img class="primary_img" src="../../../static/img/product/product4.jpg"
-                                             alt="consectetur">
+                                        <img
+                                                class="primary_img"
+                                                src="../../../static/img/product/product4.jpg"
+                                                alt="consectetur"
+                                        />
                                     </a>
                                     <div class="product_action">
                                         <ul>
-                                            <li class="wishlist"><a href="#" data-tippy="Wishlist"
-                                                                    data-tippy-inertia="true" data-tippy-delay="50"
-                                                                    data-tippy-arrow="true" data-tippy-placement="left"><i
-                                                    class="icon-heart icons"></i></a></li>
+                                            <li class="wishlist">
+                                                <a
+                                                        href="#"
+                                                        data-tippy="Wishlist"
+                                                        data-tippy-inertia="true"
+                                                        data-tippy-delay="50"
+                                                        data-tippy-arrow="true"
+                                                        data-tippy-placement="left"
+                                                ><i class="icon-heart icons"></i
+                                                ></a>
+                                            </li>
 
-                                            <li class="quick_view"><a data-toggle="modal" data-target="#modal_box"
-                                                                      data-tippy="Quick View" href="#"
-                                                                      data-tippy-inertia="true" data-tippy-delay="50"
-                                                                      data-tippy-arrow="true"
-                                                                      data-tippy-placement="left"><i
-                                                    class="icon-size-fullscreen icons"></i></a></li>
-                                            <li class="compare"><a data-tippy="Compare" href="#"
-                                                                   data-tippy-inertia="true" data-tippy-delay="50"
-                                                                   data-tippy-arrow="true"
-                                                                   data-tippy-placement="left"><i
-                                                    class="icon-refresh icons"></i></a></li>
+                                            <li class="quick_view">
+                                                <a
+                                                        data-toggle="modal"
+                                                        data-target="#modal_box"
+                                                        data-tippy="Quick View"
+                                                        href="#"
+                                                        data-tippy-inertia="true"
+                                                        data-tippy-delay="50"
+                                                        data-tippy-arrow="true"
+                                                        data-tippy-placement="left"
+                                                ><i class="icon-size-fullscreen icons"></i
+                                                ></a>
+                                            </li>
+                                            <li class="compare">
+                                                <a
+                                                        data-tippy="Compare"
+                                                        href="#"
+                                                        data-tippy-inertia="true"
+                                                        data-tippy-delay="50"
+                                                        data-tippy-arrow="true"
+                                                        data-tippy-placement="left"
+                                                ><i class="icon-refresh icons"></i
+                                                ></a>
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>
                                 <figcaption class="product_content text-center">
                                     <div class="product_ratting">
                                         <ul class="d-flex justify-content-center">
-                                            <li><a href="#"><i class="ion-android-star"></i></a></li>
-                                            <li><a href="#"><i class="ion-android-star"></i></a></li>
-                                            <li><a href="#"><i class="ion-android-star"></i></a></li>
-                                            <li><a href="#"><i class="ion-android-star"></i></a></li>
-                                            <li><a href="#"><i class="ion-android-star"></i></a></li>
+                                            <li>
+                                                <a href="#"><i class="ion-android-star"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#"><i class="ion-android-star"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#"><i class="ion-android-star"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#"><i class="ion-android-star"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#"><i class="ion-android-star"></i></a>
+                                            </li>
                                             <li><span>(8)</span></li>
                                         </ul>
                                     </div>
-                                    <h4 class="product_name"><a href="product-details.html">Simple Rounded
-                                        Sunglasses</a></h4>
+                                    <h4 class="product_name">
+                                        <a href="product-details.html">Simple Rounded Sunglasses</a>
+                                    </h4>
                                     <div class="price_box">
                                         <span class="text-black">$42.00</span>
                                     </div>
                                     <div class="add_to_cart">
-                                        <a class="btn btn-primary" href="#" data-tippy="Add To Cart"
-                                           data-tippy-inertia="true" data-tippy-delay="50" data-tippy-arrow="true"
-                                           data-tippy-placement="top">Add To Cart</a>
+                                        <a
+                                                class="btn btn-primary"
+                                                href="#"
+                                                data-tippy="Add To Cart"
+                                                data-tippy-inertia="true"
+                                                data-tippy-delay="50"
+                                                data-tippy-arrow="true"
+                                                data-tippy-placement="top"
+                                        >Add To Cart</a
+                                        >
                                     </div>
                                 </figcaption>
                             </figure>
@@ -613,50 +776,92 @@
                             <figure>
                                 <div class="product_thumb">
                                     <a href="product-details.html">
-                                        <img class="primary_img" src="../../../static/img/product/product1.jpg"
-                                             alt="consectetur">
+                                        <img
+                                                class="primary_img"
+                                                src="../../../static/img/product/product1.jpg"
+                                                alt="consectetur"
+                                        />
                                     </a>
                                     <div class="product_action">
                                         <ul>
-                                            <li class="wishlist"><a href="#" data-tippy="Wishlist"
-                                                                    data-tippy-inertia="true" data-tippy-delay="50"
-                                                                    data-tippy-arrow="true" data-tippy-placement="left"><i
-                                                    class="icon-heart icons"></i></a></li>
+                                            <li class="wishlist">
+                                                <a
+                                                        href="#"
+                                                        data-tippy="Wishlist"
+                                                        data-tippy-inertia="true"
+                                                        data-tippy-delay="50"
+                                                        data-tippy-arrow="true"
+                                                        data-tippy-placement="left"
+                                                ><i class="icon-heart icons"></i
+                                                ></a>
+                                            </li>
 
-                                            <li class="quick_view"><a data-toggle="modal" data-target="#modal_box"
-                                                                      data-tippy="Quick View" href="#"
-                                                                      data-tippy-inertia="true" data-tippy-delay="50"
-                                                                      data-tippy-arrow="true"
-                                                                      data-tippy-placement="left"><i
-                                                    class="icon-size-fullscreen icons"></i></a></li>
-                                            <li class="compare"><a data-tippy="Compare" href="#"
-                                                                   data-tippy-inertia="true" data-tippy-delay="50"
-                                                                   data-tippy-arrow="true"
-                                                                   data-tippy-placement="left"><i
-                                                    class="icon-refresh icons"></i></a></li>
+                                            <li class="quick_view">
+                                                <a
+                                                        data-toggle="modal"
+                                                        data-target="#modal_box"
+                                                        data-tippy="Quick View"
+                                                        href="#"
+                                                        data-tippy-inertia="true"
+                                                        data-tippy-delay="50"
+                                                        data-tippy-arrow="true"
+                                                        data-tippy-placement="left"
+                                                ><i class="icon-size-fullscreen icons"></i
+                                                ></a>
+                                            </li>
+                                            <li class="compare">
+                                                <a
+                                                        data-tippy="Compare"
+                                                        href="#"
+                                                        data-tippy-inertia="true"
+                                                        data-tippy-delay="50"
+                                                        data-tippy-arrow="true"
+                                                        data-tippy-placement="left"
+                                                ><i class="icon-refresh icons"></i
+                                                ></a>
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>
                                 <figcaption class="product_content text-center">
                                     <div class="product_ratting">
                                         <ul class="d-flex justify-content-center">
-                                            <li><a href="#"><i class="ion-android-star"></i></a></li>
-                                            <li><a href="#"><i class="ion-android-star"></i></a></li>
-                                            <li><a href="#"><i class="ion-android-star"></i></a></li>
-                                            <li><a href="#"><i class="ion-android-star"></i></a></li>
-                                            <li><a href="#"><i class="ion-android-star"></i></a></li>
+                                            <li>
+                                                <a href="#"><i class="ion-android-star"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#"><i class="ion-android-star"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#"><i class="ion-android-star"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#"><i class="ion-android-star"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#"><i class="ion-android-star"></i></a>
+                                            </li>
                                             <li><span>(12)</span></li>
                                         </ul>
                                     </div>
-                                    <h4 class="product_name"><a href="product-details.html">Basic Joggin Shorts</a></h4>
+                                    <h4 class="product_name">
+                                        <a href="product-details.html">Basic Joggin Shorts</a>
+                                    </h4>
                                     <div class="price_box">
                                         <span class="current_price">$26.00</span>
                                         <span class="old_price">$362.00</span>
                                     </div>
                                     <div class="add_to_cart">
-                                        <a class="btn btn-primary" href="#" data-tippy="Add To Cart"
-                                           data-tippy-inertia="true" data-tippy-delay="50" data-tippy-arrow="true"
-                                           data-tippy-placement="top">Add To Cart</a>
+                                        <a
+                                                class="btn btn-primary"
+                                                href="#"
+                                                data-tippy="Add To Cart"
+                                                data-tippy-inertia="true"
+                                                data-tippy-delay="50"
+                                                data-tippy-arrow="true"
+                                                data-tippy-placement="top"
+                                        >Add To Cart</a
+                                        >
                                     </div>
                                 </figcaption>
                             </figure>
@@ -667,27 +872,50 @@
                             <figure>
                                 <div class="product_thumb">
                                     <a href="product-details.html">
-                                        <img class="primary_img" src="../../../static/img/product/product2.jpg"
-                                             alt="consectetur">
+                                        <img
+                                                class="primary_img"
+                                                src="../../../static/img/product/product2.jpg"
+                                                alt="consectetur"
+                                        />
                                     </a>
                                     <div class="product_action">
                                         <ul>
-                                            <li class="wishlist"><a href="#" data-tippy="Wishlist"
-                                                                    data-tippy-inertia="true" data-tippy-delay="50"
-                                                                    data-tippy-arrow="true" data-tippy-placement="left"><i
-                                                    class="icon-heart icons"></i></a></li>
+                                            <li class="wishlist">
+                                                <a
+                                                        href="#"
+                                                        data-tippy="Wishlist"
+                                                        data-tippy-inertia="true"
+                                                        data-tippy-delay="50"
+                                                        data-tippy-arrow="true"
+                                                        data-tippy-placement="left"
+                                                ><i class="icon-heart icons"></i
+                                                ></a>
+                                            </li>
 
-                                            <li class="quick_view"><a data-toggle="modal" data-target="#modal_box"
-                                                                      data-tippy="Quick View" href="#"
-                                                                      data-tippy-inertia="true" data-tippy-delay="50"
-                                                                      data-tippy-arrow="true"
-                                                                      data-tippy-placement="left"><i
-                                                    class="icon-size-fullscreen icons"></i></a></li>
-                                            <li class="compare"><a data-tippy="Compare" href="#"
-                                                                   data-tippy-inertia="true" data-tippy-delay="50"
-                                                                   data-tippy-arrow="true"
-                                                                   data-tippy-placement="left"><i
-                                                    class="icon-refresh icons"></i></a></li>
+                                            <li class="quick_view">
+                                                <a
+                                                        data-toggle="modal"
+                                                        data-target="#modal_box"
+                                                        data-tippy="Quick View"
+                                                        href="#"
+                                                        data-tippy-inertia="true"
+                                                        data-tippy-delay="50"
+                                                        data-tippy-arrow="true"
+                                                        data-tippy-placement="left"
+                                                ><i class="icon-size-fullscreen icons"></i
+                                                ></a>
+                                            </li>
+                                            <li class="compare">
+                                                <a
+                                                        data-tippy="Compare"
+                                                        href="#"
+                                                        data-tippy-inertia="true"
+                                                        data-tippy-delay="50"
+                                                        data-tippy-arrow="true"
+                                                        data-tippy-placement="left"
+                                                ><i class="icon-refresh icons"></i
+                                                ></a>
+                                            </li>
                                         </ul>
                                     </div>
                                     <div class="product_label">
@@ -697,24 +925,42 @@
                                 <figcaption class="product_content text-center">
                                     <div class="product_ratting">
                                         <ul class="d-flex justify-content-center">
-                                            <li><a href="#"><i class="ion-android-star"></i></a></li>
-                                            <li><a href="#"><i class="ion-android-star"></i></a></li>
-                                            <li><a href="#"><i class="ion-android-star"></i></a></li>
-                                            <li><a href="#"><i class="ion-android-star"></i></a></li>
-                                            <li><a href="#"><i class="ion-android-star"></i></a></li>
+                                            <li>
+                                                <a href="#"><i class="ion-android-star"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#"><i class="ion-android-star"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#"><i class="ion-android-star"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#"><i class="ion-android-star"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#"><i class="ion-android-star"></i></a>
+                                            </li>
                                             <li><span>(14)</span></li>
                                         </ul>
                                     </div>
-                                    <h4 class="product_name"><a href="product-details.html">Simple Rounded
-                                        Sunglasses</a></h4>
+                                    <h4 class="product_name">
+                                        <a href="product-details.html">Simple Rounded Sunglasses</a>
+                                    </h4>
                                     <div class="price_box">
                                         <span class="current_price">$35.00</span>
                                         <span class="old_price">$38.00</span>
                                     </div>
                                     <div class="add_to_cart">
-                                        <a class="btn btn-primary" href="#" data-tippy="Add To Cart"
-                                           data-tippy-inertia="true" data-tippy-delay="50" data-tippy-arrow="true"
-                                           data-tippy-placement="top">Add To Cart</a>
+                                        <a
+                                                class="btn btn-primary"
+                                                href="#"
+                                                data-tippy="Add To Cart"
+                                                data-tippy-inertia="true"
+                                                data-tippy-delay="50"
+                                                data-tippy-arrow="true"
+                                                data-tippy-placement="top"
+                                        >Add To Cart</a
+                                        >
                                     </div>
                                 </figcaption>
                             </figure>

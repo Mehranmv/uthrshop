@@ -33,7 +33,10 @@ INSTALLED_APPS = [
     'dajax',
     'psycopg2',
     'mptt',
+    'nested_inline',
     'ckeditor',
+
+    
 
 ]
 

@@ -156,17 +156,19 @@
                                 <ul>
                                     {% recursetree category %}
                                         <li class="widget_sub_categories">
-                                            <a href="javascript:void(0)" data-toggle="collapse"
+                                            <a href="" data-toggle="collapse"
                                                data-target="#{{ node.slug }}">{{ node }}</a>
                                             {% for foo in category %}
-                                            	{% if foo.parent == node %}
-                                            		<ul class="widget_dropdown_categories collapse show"
-                                                    id="{{ node.slug }}">
-                                                    <li>
-                                                        <a href="{{ foo.slug }}"> {{ foo.title }} <span>104</span></a>
-                                                    </li>
-                                                </ul>
-                                            	{% endif %}
+                                                {% if foo.parent == node %}
+                                                    <ul class="widget_dropdown_categories collapse"
+                                                        id="{{ node.slug }}">
+                                                        <li>
+                                                            <a href="{{ foo.slug }}">
+                                                                {{ foo.title }}
+                                                                <span>104</span></a>
+                                                        </li>
+                                                    </ul>
+                                                {% endif %}
                                             {% endfor %}
                                         </li>
                                     {% endrecursetree %}

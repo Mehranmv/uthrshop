@@ -1,25 +1,34 @@
 from django.contrib import admin
-from .models import Category, Brand, Product, Choices, Pictures
+from .models import Category, Brand, Product, Choices, Pictures, Size
+from nested_inline.admin import NestedStackedInline, NestedModelAdmin
 from mptt.admin import MPTTModelAdmin
 
+class SizeInline(NestedStackedInline):
+    model = Size
+    extra = 1
 
-class PicturesInline(admin.TabularInline):
+
+class PicturesInline(NestedStackedInline):
     model = Pictures
-
-
-class ChoiceInline(admin.StackedInline):
+    extra = 1
+    
+class ChoiceInline(NestedStackedInline):
     model = Choices
+    inlines = [SizeInline, PicturesInline]
+    extra = 1
+
+
 
 
 @admin.register(Product)
-class ProductAdmin(admin.ModelAdmin):
+class ProductAdmin(NestedModelAdmin):
     list_display = ('name', 'available', 'price')
     list_filter = ('category',)
     search_fields = ('name', 'description')
     prepopulated_fields = {
         'slug': ('name',)
     }
-    inlines = [ChoiceInline, PicturesInline]
+    inlines = [ChoiceInline]
 
     fieldsets = [
         (
