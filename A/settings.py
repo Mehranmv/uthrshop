@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'products.apps.ProductsConfig',
     'blog.apps.BlogConfig',
     'orders.apps.OrdersConfig',
+    'accounts.apps.AccountsConfig',
     # Third Party Apps
     'dajaxice',
     'dajax',
