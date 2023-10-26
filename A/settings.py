@@ -29,15 +29,12 @@ INSTALLED_APPS = [
     'blog.apps.BlogConfig',
     'orders.apps.OrdersConfig',
     'accounts.apps.AccountsConfig',
+    "verify_email.apps.VerifyEmailConfig",
     # Third Party Apps
-    'dajaxice',
-    'dajax',
     'psycopg2',
     'mptt',
     'nested_inline',
     'ckeditor',
-
-
 
 ]
 
@@ -63,6 +60,7 @@ TEMPLATES = [
                 # Local Processors
                 'pages.context_processors.global_context',
                 'products.context_processors.global_context',
+                'orders.context_processors.cart',
                 # Django Processors
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
@@ -118,3 +116,15 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 AUTH_USER_MODEL = 'accounts.User'
+
+# Email Authentication
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = os.environ.get('EMAIL_ID')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PW')  # skcq shmf rfqg uuli
+DEFAULT_FROM_EMAIL = 'noreply<no_reply@domain.com>'
+EXPIRE_AFTER = "1h"
+LOGIN_URL = 'accounts:accounts_login'

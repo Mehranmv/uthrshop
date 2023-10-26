@@ -3,6 +3,7 @@ from .models import Category, Brand, Product, Choices, Pictures, Size
 from nested_inline.admin import NestedStackedInline, NestedModelAdmin
 from mptt.admin import MPTTModelAdmin
 
+
 class SizeInline(NestedStackedInline):
     model = Size
     extra = 1
@@ -11,13 +12,12 @@ class SizeInline(NestedStackedInline):
 class PicturesInline(NestedStackedInline):
     model = Pictures
     extra = 1
-    
+
+
 class ChoiceInline(NestedStackedInline):
     model = Choices
     inlines = [SizeInline, PicturesInline]
     extra = 1
-
-
 
 
 @admin.register(Product)

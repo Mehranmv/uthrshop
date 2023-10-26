@@ -1,6 +1,6 @@
 {% load mptt_tags %}
 
-<header class="header_section header_transparent">
+<header class="header_section header_transparent" style="position: absolute">
     <div class="header_top">
         <div class="container-fluid">
             <div class="row">
@@ -64,7 +64,7 @@
                             <a href="javascript:void(0)"><i class="ion-navicon"></i></a>
                         </div>
                         <div class="header_logo">
-                            <a class="sticky_none" href="../../pages/templates/pages/index.html"><img
+                            <a class="sticky_none" href="{% url 'pages:index_page' %}"><img
                                     src="../../static/img/logo/logo.png"
                                     alt=""></a>
                         </div>
@@ -90,9 +90,15 @@
                                 <li class="header_search"><a href="#"><i class="icon-magnifier icons"></i></a></li>
                                 <li class="account_link"><a href="#"><i class="icon-user icons"></i></a>
                                     <ul class="dropdown_account_link">
-                                        <li><a href="#">My Account</a></li>
-                                        <li><a href="#">Login</a></li>
-                                        <li><a href="#">Contact</a></li>
+                                        {% if not request.user.is_authenticated %}
+                                            <li><a href="{% url 'accounts:accounts_login' %}">Login</a></li>
+                                            <li><a href="{% url 'accounts:accounts_register' %}">Register</a></li>
+                                        {% else %}
+                                            <li><a href="#">My Account</a></li>
+                                            <li><a href="#">My Orders</a></li>
+                                            <li><a href="#">My Comments</a></li>
+                                            <li><a href="{% url 'accounts:accounts_logout' %}">Logout</a></li>
+                                        {% endif %}
                                     </ul>
                                 </li>
                                 <li><a href="#"><i class="icon-heart icons"></i></a> <span

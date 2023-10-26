@@ -133,12 +133,7 @@
         }
     });
     
-    
-    
-    $(document).ready(function() {
-      $('select,.select_option').niceSelect();
-    });
-    
+
     
     /*instagram activation*/
     $.instagramFeed({

@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 <head>
@@ -8,7 +9,6 @@
           content="Uthr Fashion eCommerce Bootstrap 5 Template is an innovative and modern e-commerce online store website template."/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="profile" href="https://gmpg.org/xfn/11">
-
     <!-- Add site Favicon -->
     <link rel="icon" href="https://hasthemes.com/wp-content/uploads/2019/04/cropped-favicon-32x32.png" sizes="32x32"/>
     <link rel="icon" href="https://hasthemes.com/wp-content/uploads/2019/04/cropped-favicon-192x192.png"
@@ -19,22 +19,22 @@
 
     <!-- CSS
     ========================= -->
-    <link rel="stylesheet" href="../static/css/vendor/bootstrap.min.css">
-    <link rel="stylesheet" href="../static/css/slick.css">
-    <link rel="stylesheet" href="../static/css/simple-line-icons.css">
-    <link rel="stylesheet" href="../static/css/ionicons.min.css">
-    <link rel="stylesheet" href="../static/css/font.awesome.css">
-    <link rel="stylesheet" href="../static/css/animate.css">
-    <link rel="stylesheet" href="../static/css/nice-select.css">
-    <link rel="stylesheet" href="../static/css/jquery-ui.min.css">
-    <link rel="stylesheet" href="../static/css/magnific-popup.css">
+    <link rel="stylesheet" href="{% static 'css/vendor/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/slick.css' %}">
+    <link rel="stylesheet" href="{% static 'css/simple-line-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'css/ionicons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/font.awesome.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'css/nice-select.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jquery-ui.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
 
     <!-- Main Style CSS -->
-    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
     <!--modernizr min js here-->
-    <script src="../static/js/vendor/modernizr-3.7.1.min.js"></script>
-
+    <script src="{% static 'js/vendor/modernizr-3.7.1.min.js' %}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
     <!-- Structured Data  -->
     <script type="application/ld+json">
@@ -48,7 +48,8 @@
 </head>
 <body>
 {% include 'inc/navbar.html' %}
-
+{% include 'inc/messages.html' %}
+{% include 'inc/offcanvas_menu.html' %}
 {% block content %}
 
 {% endblock %}
@@ -56,24 +57,22 @@
 
 <!-- JS
 ============================================ -->
-
-<script src="../static/js/vendor/jquery-3.4.1.min.js"></script>
-<script src="../static/js/vendor/popper.js"></script>
-<script src="../static/js/vendor/bootstrap.min.js"></script>
-<script src="../static/js/slick.min.js"></script>
-<script src="../static/js/wow.min.js"></script>
-<script src="../static/js/jquery.scrollup.min.js"></script>
-<script src="../static/js/images-loaded.min.js"></script>
-<script src="../static/js/isotope.pkgd.min.js"></script>
-<script src="../static/js/jquery.nice-select.js"></script>
-<script src="../static/js/tippy-bundle.umd.js"></script>
-<script src="../static/js/jquery-ui.min.js"></script>
-<script src="../static/js/jquery.instagramFeed.min.js"></script>
-<script src="../static/js/jquery.magnific-popup.min.js"></script>
-<script src="../static/js/mailchimp-ajax.js"></script>
-
+<script src="{% static 'js/custom.js' %}"></script>
+<script src="{% static 'js/vendor/jquery-3.4.1.min.js' %}"></script>
+<script src="{% static 'js/vendor/popper.js' %}"></script>
+<script src="{% static 'js/vendor/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/slick.min.js' %}"></script>
+<script src="{% static 'js/wow.min.js' %}"></script>
+<script src="{% static 'js/jquery.scrollup.min.js' %}"></script>
+<script src="{% static 'js/images-loaded.min.js' %}"></script>
+<script src="{% static 'js/isotope.pkgd.min.js' %}"></script>
+<script src="{% static 'js/tippy-bundle.umd.js' %}"></script>
+<script src="{% static 'js/jquery-ui.min.js' %}"></script>
+<script src="{% static 'js/jquery.instagramFeed.min.js' %}"></script>
+<script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+<script src="{% static 'js/mailchimp-ajax.js' %}"></script>
 <!-- Main JS -->
-<script src="../static/js/main.js"></script>
+<script src="{% static 'js/main.js' %}"></script>
 
 
 </body>

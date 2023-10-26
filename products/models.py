@@ -9,12 +9,6 @@ class Available(Enum):
     OUT_OF_STOCK = '0'
 
 
-class Sizes(Enum):
-    L = 'L'
-    X = 'X'
-    XL = 'XL'
-
-
 class Category(MPTTModel):
     title = models.CharField(max_length=100)
     slug = models.SlugField()
@@ -81,9 +75,11 @@ class Product(models.Model):
         verbose_name='Additional Information'
     )
 
+    def __str__(self):
+        return self.name
+
 
 # inlines
-
 
 
 class Choices(models.Model):
@@ -101,14 +97,7 @@ class Choices(models.Model):
         help_text='#f456a'
     )
     # size = models.CharField(
-    #     choices=[(size.value, size.name) for size in Sizes],
-    # )
-    price = models.FloatField(
-        blank=True,
-        null=True,
-        help_text='blank to use Base price'
-    )
-    inventory = models.IntegerField()
+    #     choices=[(size.value, size.name) for size in Sizes])
 
 
 class Size(models.Model):
@@ -118,6 +107,12 @@ class Size(models.Model):
     )
     size = models.CharField(
         max_length=200,
+    )
+    inventory = models.IntegerField()
+    price = models.FloatField(
+        blank=True,
+        null=True,
+        help_text='blank to use Base price'
     )
 
 
