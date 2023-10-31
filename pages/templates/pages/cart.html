@@ -1,62 +1,6 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
-    <!--mini cart-->
-    <div class="mini_cart">
-        <div class="cart_gallery">
-            <div class="cart_close">
-                <div class="cart_text">
-                    <h3>cart</h3>
-                </div>
-                <div class="mini_cart_close">
-                    <a href="javascript:void(0)"><i class="icon-close icons"></i></a>
-                </div>
-            </div>
-            <div class="cart_item">
-                <div class="cart_img">
-                    <a href="#"><img src="../../../static/img/product/product1.jpg" alt=""></a>
-                </div>
-                <div class="cart_info">
-                    <a href="#">Primis In Faucibus</a>
-                    <p>1 x <span> $65.00 </span></p>
-                </div>
-                <div class="cart_remove">
-                    <a href="#"><i class="icon-close icons"></i></a>
-                </div>
-            </div>
-            <div class="cart_item">
-                <div class="cart_img">
-                    <a href="#"><img src="../../../static/img/product/product2.jpg" alt=""></a>
-                </div>
-                <div class="cart_info">
-                    <a href="#">Letraset Sheets</a>
-                    <p>1 x <span> $60.00 </span></p>
-                </div>
-                <div class="cart_remove">
-                    <a href="#"><i class="icon-close icons"></i></a>
-                </div>
-            </div>
-        </div>
-        <div class="mini_cart_table">
-            <div class="cart_table_border">
-                <div class="cart_total">
-                    <span>Sub total:</span>
-                    <span class="price">$125.00</span>
-                </div>
-                <div class="cart_total mt-10">
-                    <span>total:</span>
-                    <span class="price">$125.00</span>
-                </div>
-            </div>
-        </div>
-        <div class="mini_cart_footer">
-            <div class="cart_button">
-                <a href="cart.html"><i class="fa fa-shopping-cart"></i> View cart</a>
-            </div>
-            <div class="cart_button">
-                <a href="checkout.html"><i class="fa fa-sign-in"></i> Checkout</a>
-            </div>
-        </div>
-    </div>
     <!--shopping cart area start -->
     <div class="shopping_cart_area" style="margin-top: 200px">
         <div class="container">
@@ -77,101 +21,65 @@
                                     </thead>
                                     <tbody>
                                     {% for item in cart.cart.values %}
-
-                                            <tr class="border-top">
-                                                <td>
-                                                    <div class="cart_product_thumb">
-                                                        <img src="{{ item.photo }}" alt="">
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="cart_product_text">
-                                                        <h4>{{ item.name }}</h4>
-                                                        <ul>
-                                                            <li><i class="ion-ios-arrow-right"></i> Color :
-                                                                <span>{{ color_size.color }}</span>
-                                                            </li>
-                                                            <li><i class="ion-ios-arrow-right"></i> Size :
-                                                                <span>{{ color_size.size }}</span>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="cart_product_price">
-                                                        <span>${{ item.price }}</span>
-                                                    </div>
-                                                </td>
-                                                <td class="product_quantity">
-                                                    <div class="cart_product_quantity">
-                                                        <input min="1" max="100" value="{{ color_size.quantity }}"
-                                                               type="number">
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="cart_product_price">
-                                                        <span>${{ color_size.sub_total }}</span>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="cart_product_remove text-right">
-                                                        <a href="#"><i class="ion-android-close"></i></a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        {% for color_size in item.color_sizes %}
-
-                                        {% endfor %}
+                                        <tr class="border-top">
+                                            <td>
+                                                <div class="cart_product_thumb">
+                                                    <img src="{{ item.photo }}" alt="">
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="cart_product_text">
+                                                    <h4>{{ item.name }}</h4>
+                                                    <ul>
+                                                        <li><i class="ion-ios-arrow-right"></i> Color :
+                                                            <span>{{ item.color }}</span>
+                                                        </li>
+                                                        <li><i class="ion-ios-arrow-right"></i> Size :
+                                                            <span>{{ item.size }}</span>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="cart_product_price" id="price" data-product-price="{{ item.price }}">
+                                                    ${{ item.price }}
+                                                </div>
+                                            </td>
+                                            <td class="product_quantity">
+                                                <div class="cart_product_quantity">
+                                                    <input class="change-quantity" id="{{ item.product_id }}" min="1"
+                                                           max="100"
+                                                           value="{{ item.quantity }}" type="number">
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="cart_product_price">
+                                                    <span class="product_price_container">
+                                                            ${{ item.sub_total }}
+                                                    </span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="cart_product_remove text-right">
+                                                    <a href="#" class="remove-product"
+                                                       data-product-id="{{ item.product_id }}"
+                                                       data-color="{{ item.color }}"
+                                                       data-size="{{ item.size }}"
+                                                    >
+                                                        <i class="ion-android-close"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
                                     {% endfor %}
 
                                     <tr class="border-top">
-                                    </tr>
-                                    <tr class="border-top">
-                                        <td>
-                                            <div class="cart_product_thumb">
-                                                <img src="../../../static/img/product/product6.jpg" alt="">
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="cart_product_text">
-                                                <h4>Example With Title Product</h4>
-                                                <ul>
-                                                    <li><i class="ion-ios-arrow-right"></i> Color :
-                                                        <span>White</span>
-                                                    </li>
-                                                    <li><i class="ion-ios-arrow-right"></i> Size : <span>XL</span>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="cart_product_price">
-                                                <span>$45.05</span>
-                                            </div>
-                                        </td>
-                                        <td class="product_quantity">
-                                            <div class="cart_product_quantity">
-                                                <input min="1" max="100" value="1" type="number">
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="cart_product_price">
-                                                <span>$45.05</span>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="cart_product_remove text-right">
-                                                <a href="#"><i class="ion-android-close"></i></a>
-                                            </div>
-                                        </td>
-
                                     </tr>
                                     </tbody>
                                 </table>
                             </div>
                             <div class="cart_page_button border-top d-flex justify-content-between">
                                 <div class="shopping_cart_btn">
-                                    <a href="#" class="btn btn-primary border">CLEAR SHOPPING CART</a>
+                                    <a href="" class="btn btn-primary border">CLEAR SHOPPING CART</a>
                                     <button class="btn btn-primary border" type="submit">UPDATE YOUR CART</button>
                                 </div>
                                 <div class="shopping_continue_btn">
@@ -210,13 +118,11 @@
                         <div class="col-lg-4 col-md-6 col-sm-8">
                             <div class="grand_totall_area">
                                 <div class="grand_totall_inner border-bottom">
-                                    <div class="cart_subtotal d-flex justify-content-between">
-                                        <p>sub total </p>
-                                        <span>$126.00</span>
-                                    </div>
                                     <div class="cart_grandtotal d-flex justify-content-between">
-                                        <p>grand total</p>
-                                        <span>$126.00</span>
+                                        <p>total price</p>
+                                        <span id="total_price" data-total-value="{{ cart.get_total_price }}">
+                                            ${{ cart.get_total_price }}
+                                        </span>
                                     </div>
                                 </div>
                                 <div class="proceed_checkout_btn">
@@ -232,4 +138,5 @@
         </div>
     </div>
     <!--shopping cart area end -->
+    <script src="{% static 'js/cart_custom.js' %}"></script>
 {% endblock %}

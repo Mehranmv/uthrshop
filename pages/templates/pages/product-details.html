@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
     <!-- mini cart -->
     <!--breadcrumbs area start-->
@@ -30,7 +31,7 @@
                                 {% for color_name, pictures in pictures.items %}
                                     {% for picture in pictures %}
                                         <a class="zoom_tabimg_list" href="javascript:void(0)">
-                                            <img src="{{ picture }}" alt="tab-thumb"/>
+                                            <img src="{{ picture }}" alt="tab-thumb">
                                         </a>
                                     {% endfor %}
                                 {% endfor %}
@@ -44,9 +45,7 @@
                                                     height="588px"
                                                     width="490px"
                                                     src="{{ picture }}"
-                                                    alt=""
-                                                    id="{{ color_name }}"
-                                            />
+                                                    id="{{ color_name }}">
                                         </div>
                                     {% endfor %}
                                 {% endfor %}
@@ -56,9 +55,10 @@
                 </div>
                 <div class="col-lg-6 col-md-6">
                     <div class="product_d_right">
-                        <h1>{{ product.name }}</h1>
+                        <h1 id="product-name">{{ product.name }}</h1>
                         <div class="price_box">
-                            <span class="current_price" id="price" data-product-price="{{ product.price }}"></span>
+                            <span id="price" data-product-price="{{ product.price }}"></span>
+                            <span id="per_price"></span>
                         </div>
                         <div class="product_availalbe">
                             <ul class="d-flex">
@@ -338,20 +338,18 @@
                 <div
                         class="product_slick slick_slider_activation"
                         data-slick='{
-                    "slidesToShow": 4,
-                    "slidesToScroll": 1,
-                    "arrows": true,
-                    "dots": false,
-                    "autoplay": false,
-                    "speed": 300,
-                    "infinite": true,
-                    "responsive":[
-                      {"breakpoint":992, "settings": { "slidesToShow": 3 } },
-                      {"breakpoint":768, "settings": { "slidesToShow": 2 } },
-                      {"breakpoint":300, "settings": { "slidesToShow": 1 } }
-                     ]
-                }'
-                >
+                            "slidesToShow": 3,
+                            "slidesToScroll": 1,
+                            "arrows": true,
+                            "dots": false,
+                            "autoplay": false,
+                            "speed": 300,
+                            "infinite": true,
+                            "responsive":[
+                              {"breakpoint":992, "settings": { "slidesToShow": 3 } },
+                              {"breakpoint":768, "settings": { "slidesToShow": 2 } },
+                              {"breakpoint":300, "settings": { "slidesToShow": 1 } }
+                        ]}'>
                     <div class="col-lg-3">
                         <article class="single_product">
                             <figure>
@@ -934,4 +932,5 @@
             </div>
         </div>
     </section>
+    <script src="{% static 'js/product_custom.js' %}"></script>
 {% endblock %}

@@ -57,7 +57,7 @@
               breakpoint: 576,
               settings: {
                 slidesToShow: 3,
-                 vertical: false,  
+                 vertical: false,
                   arrows: false,
               }
             },
@@ -76,7 +76,7 @@
         ]
 
     });
-    
+
     // Slick Slider Activation
     $('.product_zoom_main_img').slick({
         centerMode: true,
@@ -89,12 +89,12 @@
             {
               breakpoint: 576,
               settings: {
-                 vertical: false,  
+                 vertical: false,
               }
             },
         ]
     });
-    
+
     
     
     /*---canvas menu activation---*/

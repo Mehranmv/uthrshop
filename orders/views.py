@@ -7,6 +7,6 @@ from .cart import Cart
 class CartView(View):
     def get(self, request):
         cart = Cart(request)
-        for item in cart.cart:
-            print(cart.cart)
+        for item in cart.cart.values():
+            print(item)
         return render(request, 'pages/cart.html', {'cart': cart})

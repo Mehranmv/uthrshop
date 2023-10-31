@@ -14,12 +14,14 @@ function getCookie(name) {
 }
 
 const csrftoken = getCookie("csrftoken");
+
 $(document).ready(function () {
     $("#add-to-cart").click(function () {
         const color = $("#color-select")
         const size = $("#size-select")
         const quantity = $("#quantity")
         const product_id = $("#product_id")
+        const product_name = $("#product-name")
 
         $.ajax({
             type: "POST",
@@ -34,7 +36,6 @@ $(document).ready(function () {
 
             },
             success: function (response) {
-                console.log(response)
             }
         });
     });
@@ -73,7 +74,8 @@ $(document).ready(function () {
         const color = $("#color-select");
         const size = $("#size-select");
         const button = $("#add-to-cart");
-        var price = $("#price")
+        const price = $("#price");
+        const per_price = $("#per_price");
 
         $.ajax({
             type: "POST",
@@ -88,11 +90,25 @@ $(document).ready(function () {
                 if (response.price === "Out of Stuck") {
                     button.attr("disabled", "disabled");
                     button.val("out of stuck");
+                } else if (response.off_price) {
+                    button.removeAttr("disabled");
+                    button.val("Add to cart");
+                    price.text("$" + response.price);
+                    price.attr('data-product-price', response.price);
+                    price.addClass('current_price');
+                    price.css('color', '#ff2f2f')
+                    per_price.text("$" + response.product_price);
+                    per_price.addClass('old_price');
+
                 } else {
                     button.removeAttr("disabled");
                     button.val("Add to cart");
                     price.text("$" + response.price);
                     price.attr('data-product-price', response.price)
+                    price.addClass('curren_price')
+                    price.css('color', '#000000')
+                    per_price.empty()
+
                 }
             },
         });
@@ -125,6 +141,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 button.val("Add to cart");
                 price.text("$" + response.price);
                 price.attr('data-product-price', response.price)
+                price.addClass('current_price');
+
             }
         },
     });
