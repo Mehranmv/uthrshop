@@ -26,29 +26,11 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="product_zoom_gallery">
                         <div class="zoom_gallery_inner d-flex">
-                            <div class="zoom_tab_img">
-                                {% csrf_token %}
-                                {% for color_name, pictures in pictures.items %}
-                                    {% for picture in pictures %}
-                                        <a class="zoom_tabimg_list" href="javascript:void(0)">
-                                            <img src="{{ picture }}" alt="tab-thumb">
-                                        </a>
-                                    {% endfor %}
-                                {% endfor %}
-                            </div>
                             <div class="product_zoom_main_img">
-                                {% for color_name, pictures in pictures.items %}
-                                    {% for picture in pictures %}
-                                        <div class="product_zoom_thumb">
-                                            <img
-                                                    data-image="{{ picture }}"
-                                                    height="588px"
-                                                    width="490px"
-                                                    src="{{ picture }}"
-                                                    id="{{ color_name }}">
-                                        </div>
-                                    {% endfor %}
-                                {% endfor %}
+                                <div class="product_zoom_thumb">
+                                    <img data-image="{{ product.photo.url }}" height="588px" width="490px"
+                                         src="{{ product.photo.url }}" id="product-picture">
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -63,18 +45,11 @@
                         <div class="product_availalbe">
                             <ul class="d-flex">
                                 <li>
-                                    <i class="icon-layers icons"></i> Only <span>20</span> left
+                                    <i class="icon-layers icons"></i> Only <span id="inventory-text" ></span> left
                                 </li>
                                 <li id="availability-message">
                                     Available:
-                                    <span class="stock"
-                                          style="color:{% if product.available == '0' %}red{% endif %}">
-                                            {% if product.available == '1' %}
-                                                In Stuck
-                                            {% else %}
-                                                Out Of Stuck
-                                            {% endif %}
-                                        </span>
+                                    <span id="stock_text" class="stock"></span>
                                 </li>
                             </ul>
                         </div>

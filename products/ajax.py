@@ -16,7 +16,8 @@ def add_to_cart(request):
         ).first()
         if choices:
             size = choices.size_set.filter(size=request.POST.get('size')).first()
-            if size.inventory != 0:
+            print(size)
+            if size[0]['inventory'] != 0:
                 cart.add(
                     product=product,
                     quantity=request.POST.get('quantity'),
@@ -37,13 +38,16 @@ def update_price(request):
             price = choice.size_set.filter(size=size).values()
             if price[0]['inventory'] != 0:
                 if price[0]['price'] is None:
-                    return JsonResponse({'price': product.price, 'off_price': False})
+                    return JsonResponse(
+                        {'price': product.price, 'off_price': False, 'inventory': price[0]['inventory']})
                 else:
                     if price[0]['price'] > product.price:
-                        return JsonResponse({'price': price[0]['price'], 'off_price': False})
+                        return JsonResponse(
+                            {'price': price[0]['price'], 'off_price': False, 'inventory': price[0]['inventory']})
                     else:
                         return JsonResponse(
-                            {'price': price[0]['price'], 'off_price': True, 'product_price': product.price})
+                            {'price': price[0]['price'], 'off_price': True, 'product_price': product.price,
+                             'inventory': price[0]['inventory']})
             else:
                 return JsonResponse({'price': 'Out of Stuck'})
         else:
@@ -58,9 +62,10 @@ def color_sizes(request):
         product = Product.objects.get(slug=request.POST.get('slug'))
         choice = product.choices_set.get(color_name=color)
         sizes = choice.size_set.all().values()
+        picture = choice.pictures_set.first()
         values = []
         for item in sizes:
             values.append(item['size'])
 
         print(values)
-        return JsonResponse({'sizes2': values})
+        return JsonResponse({'sizes2': values, 'picture': picture.picture.url})

@@ -46,6 +46,7 @@ $(document).ready(function () {
     $("#color-select").change(function () {
         const color = $("#color-select");
         const sizes1 = $("#size-select");
+        const photo = $("#product-picture");
         $.ajax({
             type: "POST",
             url: "/color/sizes/",
@@ -56,6 +57,7 @@ $(document).ready(function () {
             },
             success: function (response) {
                 const sizes2 = response.sizes2;
+                photo.attr('src', response.picture)
                 $("#size-select option").each(function () {
                     const optionValue = $(this).val();
                     if (!sizes2.includes(optionValue)) {
@@ -76,6 +78,8 @@ $(document).ready(function () {
         const button = $("#add-to-cart");
         const price = $("#price");
         const per_price = $("#per_price");
+        const stock = $("#stock_text")
+        const inventory = $("#inventory-text")
 
         $.ajax({
             type: "POST",
@@ -90,6 +94,12 @@ $(document).ready(function () {
                 if (response.price === "Out of Stuck") {
                     button.attr("disabled", "disabled");
                     button.val("out of stuck");
+                    price.text("Out of Stuck");
+                    price.attr('data-product-price', response.price);
+                    price.addClass('current_price');
+                    stock.text("Out of Stuck");
+                    stock.css("color", "#ff2f2f");
+                    inventory.empty()
                 } else if (response.off_price) {
                     button.removeAttr("disabled");
                     button.val("Add to cart");
@@ -99,6 +109,9 @@ $(document).ready(function () {
                     price.css('color', '#ff2f2f')
                     per_price.text("$" + response.product_price);
                     per_price.addClass('old_price');
+                    stock.text("IN STOCK");
+                    stock.css("color", "green");
+                    inventory.text(response.inventory);
 
                 } else {
                     button.removeAttr("disabled");
@@ -108,21 +121,24 @@ $(document).ready(function () {
                     price.addClass('curren_price')
                     price.css('color', '#000000')
                     per_price.empty()
+                    stock.text("IN STOCK");
+                    stock.css("color", "green");
+                    inventory.text(response.inventory);
+
 
                 }
             },
         });
     });
 });
-
-document.addEventListener("DOMContentLoaded", function () {
-    // Send an Ajax request to the server
-    var xhr = new XMLHttpRequest();
+$(document).ready(function () {
     var color = $("#color-select");
     var size = $("#size-select");
     var button = $("#add-to-cart");
-    var price = $("#price")
-
+    var price = $("#price");
+    const pre_price = $("#per_price")
+    const stock = $("#stock_text");
+    const inventory = $("#inventory-text");
     $.ajax({
         type: "POST",
         url: "/update_price/",
@@ -136,24 +152,45 @@ document.addEventListener("DOMContentLoaded", function () {
             if (response.price === "Out of Stuck") {
                 button.attr("disabled", "disabled");
                 button.val("out of stuck");
+                price.text("Out of Stuck");
+                price.attr('data-product-price', response.price);
+                price.addClass('current_price');
+                stock.text("Out of Stuck");
+                stock.css("color", "#ff2f2f");
+                inventory.empty();
+            } else if (response.off_price) {
+                button.removeAttr("disabled");
+                button.val("Add to cart");
+                price.text("$" + response.price);
+                price.attr('data-product-price', response.price);
+                price.addClass('current_price');
+                price.css('color', '#ff2f2f')
+                pre_price.text("$" + response.product_price);
+                pre_price.addClass('old_price');
+                stock.text("IN STOCK");
+                stock.css("color", "green");
+                inventory.text(response.inventory);
             } else {
                 button.removeAttr("disabled");
                 button.val("Add to cart");
                 price.text("$" + response.price);
                 price.attr('data-product-price', response.price)
-                price.addClass('current_price');
-
+                price.addClass('current_price')
+                price.css('color', '#000000')
+                pre_price.empty()
+                stock.text("IN STOCK");
+                stock.css("color", "green");
+                inventory.text(response.inventory);
             }
         },
     });
 });
-
-document.addEventListener("DOMContentLoaded", function () {
+$(document).ready(function () {
     // Send an Ajax request to the server
     var xhr = new XMLHttpRequest();
-    const color = $("#color-select");
-    const size = $("#size-select");
-    const button = $("#add-to-cart");
+    var color = $("#color-select");
+    var size = $("#size-select");
+    var button = $("#add-to-cart");
     $.ajax({
         type: "POST",
         url: "/color/sizes/",
@@ -163,9 +200,9 @@ document.addEventListener("DOMContentLoaded", function () {
             csrfmiddlewaretoken: csrftoken,
         },
         success: function (response) {
-            const sizes2 = response.sizes2;
+            var sizes2 = response.sizes2;
             $("#size-select option").each(function () {
-                const optionValue = $(this).val();
+                var optionValue = $(this).val();
                 if (!sizes2.includes(optionValue)) {
                     $(this).prop("disabled", "disabled");
                 } else {
