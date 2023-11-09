@@ -15,13 +15,16 @@ function getCookie(name) {
 
 const csrftoken = getCookie("csrftoken");
 
+
 $(document).ready(function () {
     $("#add-to-cart").click(function () {
-        const color = $("#color-select")
-        const size = $("#size-select")
-        const quantity = $("#quantity")
-        const product_id = $("#product_id")
-        const product_name = $("#product-name")
+        const color = $("#color-select");
+        const size = $("#size-select");
+        const quantity = $("#quantity");
+        const product_id = $("#product_id");
+        const product_name = $("#product-name");
+        const cart_count = $("#cart_count");
+        const mini_cart = $(".mini_cart")
 
         $.ajax({
             type: "POST",
@@ -36,6 +39,8 @@ $(document).ready(function () {
 
             },
             success: function (response) {
+                cart_count.text(response.cart_count);
+
             }
         });
     });
@@ -139,6 +144,8 @@ $(document).ready(function () {
     const pre_price = $("#per_price")
     const stock = $("#stock_text");
     const inventory = $("#inventory-text");
+    const cart_count = $("#cart_count");
+
     $.ajax({
         type: "POST",
         url: "/update_price/",
@@ -149,6 +156,7 @@ $(document).ready(function () {
             csrfmiddlewaretoken: csrftoken,
         },
         success: function (response) {
+            cart_count.text(response.cart_count)
             if (response.price === "Out of Stuck") {
                 button.attr("disabled", "disabled");
                 button.val("out of stuck");

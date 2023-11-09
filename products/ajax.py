@@ -16,8 +16,7 @@ def add_to_cart(request):
         ).first()
         if choices:
             size = choices.size_set.filter(size=request.POST.get('size')).first()
-            print(size)
-            if size[0]['inventory'] != 0:
+            if size.inventory != 0:
                 cart.add(
                     product=product,
                     quantity=request.POST.get('quantity'),
@@ -25,7 +24,11 @@ def add_to_cart(request):
                     color=request.POST.get('color'),
                     size=request.POST.get('size'),
                 )
-            return JsonResponse({"message": " Added To Cart Successfully!", })
+                size.inventory -= 1
+                return JsonResponse({"success": " Added To Cart Successfully!", "cart_count": cart.get_cart_counter()})
+            else:
+                return JsonResponse({"error": "The inventory is 0 !"})
+
 
 
 def update_price(request):
@@ -58,6 +61,7 @@ def update_price(request):
 
 def color_sizes(request):
     if request.method == "POST":
+        cart = Cart(request)
         color = request.POST.get('color')
         product = Product.objects.get(slug=request.POST.get('slug'))
         choice = product.choices_set.get(color_name=color)
@@ -68,4 +72,4 @@ def color_sizes(request):
             values.append(item['size'])
 
         print(values)
-        return JsonResponse({'sizes2': values, 'picture': picture.picture.url})
+        return JsonResponse({'sizes2': values, 'picture': picture.picture.url, "cart_count": cart.get_cart_counter()})

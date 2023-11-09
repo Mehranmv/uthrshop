@@ -69,3 +69,6 @@ class Cart:
 
     def save(self):
         self.session.modified = True
+
+    def get_cart_counter(self):
+        return len(self.cart)
