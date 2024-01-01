@@ -1,4 +1,3 @@
-Sure, I can help you with that. Here's a possible `README.md` file for the uthrshop GitHub repository:
 
 ```markdown
 # uthrshop
@@ -62,9 +61,9 @@ python manage.py migrate
 
 6. Create a superuser:
 
-```
+
 python manage.py createsuperuser
-```
+
 
 7. Run the development server:
 
