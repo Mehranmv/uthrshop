@@ -6,12 +6,12 @@ uthrshop is an ecommerce platform developed with Django, Bootstrap, and jQuery. 
 
 ## Features
 
-- User registration and login system
-- Product catalog with categories and filters
-- Shopping cart and checkout functionality
-- Payment integration with Stripe
-- Order history and status tracking
-- Admin panel for managing products, orders, and users
+* User registration and login system
+* Product catalog with categories and filters
+* Shopping cart and checkout functionality
+* Payment integration with Stripe
+* Order history and status tracking
+* Admin panel for managing products, orders, and users
 
 ## Getting Started
 
